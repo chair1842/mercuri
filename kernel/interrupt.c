@@ -25,6 +25,14 @@ void irq1_handler() {
     outb(0x20, 0x20); // Send EOI to PIC
 }
 
+void isr_handler_c(unsigned int vector) {
+    if (vector == 0x21) {
+        irq1_handler();  // your keyboard handler
+    }
+    // ... other IRQs/exceptions ...
+}
+
+
 static void idt_set_gate(int n, uint32_t handler, uint16_t sel, uint8_t flags) {
     idt[n].base_lo  = handler & 0xFFFF;
     idt[n].base_hi  = (handler >> 16) & 0xFFFF;
