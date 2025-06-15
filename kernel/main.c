@@ -17,9 +17,9 @@ void kernel_init() {
     paging_init();
     print_string("Paging Initialized\n");
     delay(100000000); // Delay to simulate some initialization time
-    interrupt_init();
+    /* interrupt_init();
     print_string("Interrupts Initialized\n");
-    delay(100000000); // Delay to simulate some initialization time
+    delay(100000000); // Delay to simulate some initialization time */
 
     print_string("Kernel Initialized\n");
     clear_screen();
