@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "keyboard.h": "c",
+        "vga.h": "c",
+        "stdint.h": "c",
+        "paging.h": "c",
+        "stddef.h": "c"
+    },
+    "editor.fontFamily": "monospace"
+}
