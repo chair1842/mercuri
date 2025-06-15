@@ -13,14 +13,13 @@ void kernel_init() {
     clear_screen();
     memory_init();
     print_string("Memory Initialized\n");
+    delay(100000000); // Delay to simulate some initialization time
     paging_init();
     print_string("Paging Initialized\n");
-    /* keyboard_init();
-    print_string("Keyboard Initialized\n"); */
+    delay(100000000); // Delay to simulate some initialization time
     interrupt_init();
     print_string("Interrupts Initialized\n");
-    /* keyboard_init();
-    print_string("Keyboard Initialized\n"); */
+    delay(100000000); // Delay to simulate some initialization time
 
     print_string("Kernel Initialized\n");
     clear_screen();
