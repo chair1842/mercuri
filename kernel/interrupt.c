@@ -25,8 +25,15 @@ void irq1_handler() {
     keyboard_poll(); // Use your existing logic
     outb(0x20, 0x20); // Send EOI to PIC
 }
+void irq0_handler() {
+    // Timer interrupt handler logic (if needed)
+    outb(0x20, 0x20); // Send EOI to PIC
+}
 
 void isr_handler_c(unsigned int vector) {
+    if (vector == 0x20) {
+        irq0_handler();
+    }
     if (vector == 0x21) {
         irq1_handler();  // your keyboard handler
     }
