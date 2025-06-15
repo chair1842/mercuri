@@ -19,8 +19,8 @@ void kernel_init() {
     print_string("Keyboard Initialized\n"); */
     interrupt_init();
     print_string("Interrupts Initialized\n");
-    keyboard_init();
-    print_string("Keyboard Initialized\n");
+    /* keyboard_init();
+    print_string("Keyboard Initialized\n"); */
 
     print_string("Kernel Initialized\n");
     clear_screen();
@@ -36,7 +36,7 @@ void kernel_main() {
     keyboard_get_char();
     clear_screen();
     print_string("Hello, World! :)\n");
-    while (!keyboard_available) {
+    while (!keyboard_available()) {
         print_string("#");
     }
 }
