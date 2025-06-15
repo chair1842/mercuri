@@ -55,6 +55,12 @@ void interrupt_init() {
     extern void pic_remap(int, int);
     pic_remap(0x20, 0x28);
 
+    // Unmask IRQ0 (timer) and IRQ1 (keyboard) on master PIC
+    // PIC1 mask = 11111100b → bits0–1 = 0 (unmasked)
+    outb(0x21, 0xFC);
+    // Keep slave PIC fully masked until you need it
+    outb(0xA1, 0xFF);
+
     // clear all entries
     for (int i = 0; i < IDT_ENTRIES; i++)
         idt_set_gate(i, 0, 0, 0);
