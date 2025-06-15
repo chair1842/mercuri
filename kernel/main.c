@@ -36,6 +36,9 @@ void kernel_main() {
     keyboard_get_char();
     clear_screen();
     print_string("Hello, World! :)\n");
+    while (!keyboard_available) {
+        print_string("#")
+    }
 }
     
 
