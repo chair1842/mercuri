@@ -30,15 +30,18 @@ void kernel_main() {
     kernel_init();
 
     // Type any key to continue
-    print_string("Type any key to continue...\n");
+    print_string("Interrupts enabled.\n");
+    print_string("Press any key...\n");
 
-    // keyboard_get_char();
-    clear_screen();
-    print_string("Hello, World! :)\n");
-    /* while (!keyboard_available()) {
-        print_string("#");
-        delay(100000000);
-    } */
+    char c = keyboard_get_char();  // now truly interrupt‑driven
+    print_string("You pressed: ");
+    print_char(c);
+    print_string("\n");
+
+    // spin using hlt
+    while (1) {
+        __asm__ volatile("hlt");
+    }
 }
     
 

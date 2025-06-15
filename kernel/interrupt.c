@@ -30,6 +30,8 @@ void irq0_handler() {
     outb(0x20, 0x20); // Send EOI to PIC
 }
 
+extern void pic_remap(int offset1, int offset2);
+
 void isr_handler_c(unsigned int vector) {
     if (vector == 0x20) {
         irq0_handler();
