@@ -27,6 +27,11 @@ void irq1_handler() {
 }
 
 void isr_handler_c(unsigned int vector) {
+    if (vector == 0x20) {         // IRQ0 = timer
+        outb(0x20, 0x20);         // EOI
+        // increment your tick counter here
+        print_string("hello");
+    }
     if (vector == 0x21) {
         irq1_handler();  // your keyboard handler
     }
