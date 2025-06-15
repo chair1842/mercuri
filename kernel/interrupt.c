@@ -51,39 +51,34 @@ static void idt_set_gate(int n, uint32_t handler, uint16_t sel, uint8_t flags) {
 
 extern void lidt(struct idt_ptr* idt_ptr);
 
-void interrupt_init() {
-    extern void pic_remap(int, int);
+void interrupt_init(void) {
+    // 1) Remap PIC: IRQs 0–15 → vectors 0x20–0x2F
     pic_remap(0x20, 0x28);
 
-    // Unmask IRQ0 (timer) and IRQ1 (keyboard) on master PIC
-    // PIC1 mask = 11111100b → bits0–1 = 0 (unmasked)
-    outb(0x21, 0xFC);
-    // Keep slave PIC fully masked until you need it
-    outb(0xA1, 0xFF);
+    // 2) Mask all IRQs initially
+    outb(0x21, 0xFF); // Mask master PIC
+    outb(0xA1, 0xFF); // Mask slave PIC
 
-    // clear all entries
-    for (int i = 0; i < IDT_ENTRIES; i++)
-        idt_set_gate(i, 0, 0, 0);
-
-    // Install stubs for ISR 0–47 (CPU exceptions + IRQs)
-    for (int i = 0; i < 48; i++) {
-        idt_set_gate(
-            i,
-            (uint32_t)isr_stub_table[i],  // the ith function pointer
-            0x08,
-            0x8E
-        );
+    // 3) Install IDT entries for exceptions (0–31) and IRQs (32–47)
+    for (int i = 0; i < IDT_ENTRIES; i++) {
+        idt_set_gate(i, (uint32_t)isr_stub_table[i], 0x08, 0x8E);
     }
 
-    // load IDT
+    // 4) Load the IDT
     idtp.limit = sizeof(idt) - 1;
     idtp.base  = (uint32_t)&idt;
     lidt(&idtp);
 
-    /* // Initialize keyboard driver & unmask IRQ1
-    keyboard_init();
-    print_string("Keyboard Initialized\n"); */
+    // 5) Unmask only IRQ0 (timer) and IRQ1 (keyboard)
+    //    Master PIC mask port = 0x21: clear bits 0 and 1
+    outb(0x21, 0xFC);  // 11111100b => IRQ0 & IRQ1 enabled
+    //    Leave slave fully masked (unless you have IRQs there)
+    outb(0xA1, 0xFF);
 
-    // Now enable interrupts!
+    // 6) Initialize drivers that rely on IRQs
+    keyboard_init();         // drains buffer + (re)unmasks IRQ1 bit
+    print_string("Keyboard driver ready\n");
+
+    // 7) Now safe to enable interrupts
     __asm__ volatile("sti");
 }
