@@ -67,6 +67,10 @@ void interrupt_init() {
 
     // load it
     lidt(&idtp);
+
+    keyboard_init(); // Initialize keyboard driver
+    print_string("Keyboard Initialized\n");
+
     // enable interrupts
     __asm__ volatile ("sti");
 }
