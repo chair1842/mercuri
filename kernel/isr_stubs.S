@@ -92,9 +92,9 @@ isr_stub_table:
     .long isr17
     .long isr18
     .long isr19
-    .long isr20
+    .long isr20 */
     .long isr21
-    .long isr22
+/*     .long isr22
     .long isr23
     .long isr24
     .long isr25
@@ -103,12 +103,12 @@ isr_stub_table:
     .long isr28
     .long isr29
     .long isr30
-    .long isr31 */
+    .long isr31
     .long isr32
     .long isr33
     .long isr34
     .long isr35
-    .long isr36
+    .long isr36 */
     .long isr37
     .long isr38
     .long isr39
