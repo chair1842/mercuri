@@ -45,8 +45,7 @@ $(TARGET).bin: $(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $^
 
 run: $(TARGET).bin
-	qemu-system-i386 -kernel $(TARGET).bin -no-reboot
-
+	qemu-system-i386 -kernel $(TARGET).bin
 clean:
 	rm -f $(OBJS) $(TARGET).bin
 
