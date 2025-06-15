@@ -37,7 +37,7 @@ void kernel_main() {
     clear_screen();
     print_string("Hello, World! :)\n");
     while (!keyboard_available) {
-        print_string("#")
+        print_string("#");
     }
 }
     
