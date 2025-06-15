@@ -81,12 +81,6 @@ void keyboard_poll(void) {
     if (!(inb(STATUS_PORT) & 1)) return;
     uint8_t sc = inb(DATA_PORT);
 
-    if (keyboard_debug) {
-        print_string("[kbd] Scancode: ");
-        print_hex(sc);
-        print_string("\n");
-    }
-
     if (sc == 0xE0) {
         extended_scancode = true;
         if (keyboard_debug) print_string("[kbd] Extended code\n");
