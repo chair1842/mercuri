@@ -72,7 +72,7 @@ isr_common_stub:
     out     0xA0, al           // outb AL to port 0xA0
 
 isr_stub_table:
-/*     .long isr0
+    .long isr0
     .long isr1
     .long isr2
     .long isr3
@@ -92,9 +92,9 @@ isr_stub_table:
     .long isr17
     .long isr18
     .long isr19
-    .long isr20 */
+    .long isr20
     .long isr21
-/*     .long isr22
+    .long isr22
     .long isr23
     .long isr24
     .long isr25
@@ -108,7 +108,7 @@ isr_stub_table:
     .long isr33
     .long isr34
     .long isr35
-    .long isr36 */
+    .long isr36
     .long isr37
     .long isr38
     .long isr39
