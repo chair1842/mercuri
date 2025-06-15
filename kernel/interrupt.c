@@ -18,6 +18,11 @@ extern void isr_stub_table();  // from assembly
 static struct idt_entry idt[IDT_ENTRIES];
 static struct idt_ptr   idtp;
 
+void irq1_handler() {
+    keyboard_poll(); // Use your existing logic
+    outb(0x20, 0x20); // Send EOI to PIC
+}
+
 static void idt_set_gate(int n, uint32_t handler, uint16_t sel, uint8_t flags) {
     idt[n].base_lo  = handler & 0xFFFF;
     idt[n].base_hi  = (handler >> 16) & 0xFFFF;
