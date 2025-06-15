@@ -2,6 +2,7 @@
 #include <interrupt.h>
 #include <driver/keyboard.h>
 #include <io.h>
+#include <vga.h>
 
 #define IDT_ENTRIES 256
 struct idt_entry {
