@@ -14,6 +14,7 @@ void keyboard_init(void);
 bool keyboard_available(void);
 char keyboard_read_char(void);
 char keyboard_get_char(void);
+void keyboard_poll(void);
 
 // Optional accessors
 bool keyboard_shift_pressed(void);
