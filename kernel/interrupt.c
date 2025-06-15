@@ -45,33 +45,32 @@ static void idt_set_gate(int n, uint32_t handler, uint16_t sel, uint8_t flags) {
 extern void lidt(struct idt_ptr* idt_ptr);
 
 void interrupt_init() {
-    // remap PIC so IRQs start at 0x20
     extern void pic_remap(int, int);
     pic_remap(0x20, 0x28);
 
-    // fill IDT
-    idtp.limit = sizeof(idt) - 1;
-    idtp.base  = (uint32_t)&idt;
-    // null all
+    // clear all entries
     for (int i = 0; i < IDT_ENTRIES; i++)
         idt_set_gate(i, 0, 0, 0);
 
-    // CPU exceptions (0–31)
-    for (int i = 0; i < 32; i++)
-        idt_set_gate(i, (uint32_t)isr_stub_table + i*8, 0x08, 0x8E);
+    // Install stubs for ISR 0–47 (CPU exceptions + IRQs)
+    for (int i = 0; i < 48; i++) {
+        idt_set_gate(
+            i,
+            (uint32_t)isr_stub_table[i],  // the ith function pointer
+            0x08,
+            0x8E
+        );
+    }
 
-    // IRQs (32–47)
-    for (int i = 0; i < 16; i++)
-        idt_set_gate(0x20 + i, (uint32_t)isr_stub_table + (32 + i)*8, 0x08, 0x8E);
-    
-    idt_set_gate(0x21, (uint32_t)isr_stub_table[0x21], 0x08, 0x8E);
-
-    // load it
+    // load IDT
+    idtp.limit = sizeof(idt) - 1;
+    idtp.base  = (uint32_t)&idt;
     lidt(&idtp);
 
-    keyboard_init(); // Initialize keyboard driver
+    // Initialize keyboard driver & unmask IRQ1
+    keyboard_init();
     print_string("Keyboard Initialized\n");
 
-    // enable interrupts
-    __asm__ volatile ("sti");
+    // Now enable interrupts!
+    __asm__ volatile("sti");
 }
