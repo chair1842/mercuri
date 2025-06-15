@@ -15,7 +15,7 @@ struct idt_ptr {
     uint32_t base;
 } __attribute__((packed));
 
-extern void isr_stub_table[];  // from assembly
+extern void isr_stub_table();  // from assembly
 static struct idt_entry idt[IDT_ENTRIES];
 static struct idt_ptr   idtp;
 
