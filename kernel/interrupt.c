@@ -47,6 +47,8 @@ void interrupt_init() {
     // IRQs (32–47)
     for (int i = 0; i < 16; i++)
         idt_set_gate(0x20 + i, (uint32_t)isr_stub_table + (32 + i)*8, 0x08, 0x8E);
+    
+    idt_set_gate(0x21, (uint32_t)isr_stub_table[0x21], 0x08, 0x8E);
 
     // load it
     lidt(&idtp);
