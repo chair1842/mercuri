@@ -32,11 +32,6 @@ void kernel_main() {
     keyboard_init();
     print_string("Type any key to continue...\n");
 
-    // Clear leftover keystrokes
-    while (keyboard_available()) {
-        keyboard_read_char();
-    }
-
     keyboard_get_char();
     clear_screen();
     print_string("Hello, World! :)\n");
