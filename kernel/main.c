@@ -29,7 +29,6 @@ void kernel_main() {
     kernel_init();
 
     // Type any key to continue
-    keyboard_init();
     print_string("Type any key to continue...\n");
 
     keyboard_get_char();
