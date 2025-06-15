@@ -80,9 +80,9 @@ void interrupt_init() {
     idtp.base  = (uint32_t)&idt;
     lidt(&idtp);
 
-    // Initialize keyboard driver & unmask IRQ1
+    /* // Initialize keyboard driver & unmask IRQ1
     keyboard_init();
-    print_string("Keyboard Initialized\n");
+    print_string("Keyboard Initialized\n"); */
 
     // Now enable interrupts!
     __asm__ volatile("sti");
