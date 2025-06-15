@@ -33,9 +33,7 @@ void kernel_main() {
     // Type any key to continue
     print_string("Type any key to continue...\n");
 
-    while (!keyboard_available) {
-        delay(100000000);
-    }
+    keyboard_get_char();
     clear_screen();
     print_string("Hello, World! :)\n");
     while (!keyboard_available) {

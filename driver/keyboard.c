@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <driver/keyboard.h>
 #include <io.h>
+#include <vga.h>
 
 /* Public API */
 void keyboard_init(void);
