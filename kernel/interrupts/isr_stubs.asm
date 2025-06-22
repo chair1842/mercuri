@@ -1,16 +1,34 @@
-%macro isr_err_stub 1
-isr_stub_%+%1:
-    call exception_handler
-    iret 
-%endmacro
-; if writing for 64-bit, use iretq instead
+extern exception_handler
+
+; ——————————————————————————————————————————————————————————————
+; ISRs without a hardware-pushed error code
+; we push a dummy error code (0), then the vector number
 %macro isr_no_err_stub 1
-isr_stub_%+%1:
+global isr_stub_%1
+isr_stub_%1:
+    cli
+    push dword %1         ; <-- Push the vector number
     call exception_handler
+    add esp, 4            ; Clean up the pushed number
+    sti
+    iretd
+%endmacro
+
+; ——————————————————————————————————————————————————————————————
+; ISRs with a hardware-pushed error code
+; CPU has already pushed the error code for these,
+; so we only push the vector number
+%macro isr_err_stub 1
+global isr_stub_%1
+isr_stub_%1:
+    push dword %1      ; vector number
+    call exception_handler
+    add  esp, 4        ; clean up just the vector
     iret
 %endmacro
 
-extern exception_handler
+; ——————————————————————————————————————————————————————————————
+; Generate all 32 stubs
 isr_no_err_stub 0
 isr_no_err_stub 1
 isr_no_err_stub 2
@@ -44,10 +62,13 @@ isr_no_err_stub 29
 isr_err_stub    30
 isr_no_err_stub 31
 
+; ——————————————————————————————————————————————————————————————
+; Build the table of stub entry points
 global isr_stub_table
+section .data
 isr_stub_table:
-%assign i 0 
-%rep    32 
-    dd isr_stub_%+i ; use DQ instead if targeting 64-bit
-%assign i i+1 
+%assign i 0
+%rep 32
+    dd isr_stub_%+i
+%assign i i+1
 %endrep

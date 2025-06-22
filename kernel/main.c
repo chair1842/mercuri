@@ -2,7 +2,7 @@
 #include <driver/keyboard.h>
 #include <memory/memory.h>
 #include <memory/paging.h>
-
+#include <interrupts/idt.h>
 
 void delay(volatile int count) {
     for (volatile int i = 0; i < count; i++);
@@ -14,6 +14,9 @@ void kernel_init() {
     print_string("Memory Initialized\n");
     paging_init();
     print_string("Paging Initialized\n");
+    idt_init();
+    print_string("IDT Initialized\n");
+
 
     print_string("Kernel Initialized\n");
     clear_screen();
@@ -21,20 +24,20 @@ void kernel_init() {
 
 
 void kernel_main() {
-    kernel_init();
+    /* kernel_init();
 
     // Type any key to continue
     keyboard_init();
     print_string("Type any key to continue...\n");
 
-    // Clear leftover keystrokes
-    while (keyboard_available()) {
-        keyboard_read_char();
-    }
-
     keyboard_get_char();
     clear_screen();
-    print_string("Hello, World! :)\n");
+    print_string("Hello, World! :)\n"); */
+
+    clear_screen();
+    idt_init();
+
+    int a = 1 /0;
 }
     
 
