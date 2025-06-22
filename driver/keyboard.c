@@ -1,6 +1,8 @@
 #include <driver/keyboard.h>
 #include <vga.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include <io.h>
 
 #define DATA_PORT   0x60
 #define STATUS_PORT 0x64
@@ -31,12 +33,6 @@ static char scancode_to_ascii_shift[128] = {
     0,'|','Z','X','C','V','B','N','M','<','>','?',
     0,'*', 0,' ', 0,
 };
-
-static inline uint8_t inb(uint16_t port) {
-    uint8_t result;
-    __asm__ volatile ("inb %1, %0" : "=a"(result) : "Nd"(port));
-    return result;
-}
 
 static inline void buffer_push(char c) {
     int next = (buffer_head + 1) % BUFFER_SIZE;
