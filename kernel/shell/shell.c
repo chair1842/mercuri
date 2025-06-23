@@ -18,14 +18,14 @@ void echo(const char* str) {
     set_color(COLOR_WHITE, COLOR_BLACK);
 }
 
-void shell_init() {
-    shell_welcome();
-    shell();
-}
-
 void shell() {
     while (1) {
         print_string("#");
         delay(10000000);
     }
+}
+
+void shell_init() {
+    shell_welcome();
+    shell();
 }

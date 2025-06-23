@@ -5,10 +5,6 @@
 #include <interrupts/idt.h>
 #include "shell/shell.c"
 
-void delay(volatile int count) {
-    for (volatile int i = 0; i < count; i++);
-}
-
 void kernel_init() {
     clear_screen();
     memory_init();

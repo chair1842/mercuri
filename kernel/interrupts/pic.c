@@ -1,5 +1,5 @@
 // pic.c
-#include <pic.h>
+#include <interrupts/pic.h>
 #include <io.h>  // your outb(), inb(), and io_wait()
 
 // Remap PIC so IRQs 0–7 → vectors offset1..offset1+7,
