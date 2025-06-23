@@ -1,3 +1,5 @@
+#include <stdint.h>
+#include <stdbool.h>
 #include <vga.h>
 #include <io.h>
 
@@ -87,6 +89,43 @@ void print_char(char c) {
 void print_string(const char* str) {
     for (uint16_t i = 0; str[i] != '\0'; i++) {
         print_char(str[i]);
+    }
+}
+
+void print_int(int32_t value) {
+    char buf[12];     // enough for “-2147483648\0”
+    int  i = 0;
+    bool neg = false;
+
+    if (value == 0) {
+        print_char('0');
+        return;
+    }
+
+    if (value < 0) {
+        neg = true;
+        // handle INT32_MIN specially, since -INT32_MIN overflows
+        if (value == INT32_MIN) {
+            // "-2147483648"
+            print_string("-2147483648");
+            return;
+        }
+        value = -value;
+    }
+
+    // Extract digits in reverse order
+    while (value > 0) {
+        buf[i++] = '0' + (value % 10);
+        value /= 10;
+    }
+
+    if (neg) {
+        buf[i++] = '-';
+    }
+
+    // Now print in correct order
+    while (i--) {
+        print_char(buf[i]);
     }
 }
 

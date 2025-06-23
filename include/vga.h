@@ -38,6 +38,7 @@ void set_color(uint8_t fg, uint8_t bg);
 void clear_screen();
 void print_char(char c);
 void print_string(const char* str);
+void print_int(int32_t value);
 void vga_set_cursor(uint16_t row, uint16_t col);
 void vga_hide_cursor();
 void vga_show_cursor();

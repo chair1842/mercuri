@@ -1,37 +1,27 @@
-#ifndef IO_H
-#define IO_H
+#pragma once
 
 #include <stdint.h>
 
-#include <stdint.h>
-static inline uint8_t inb(uint16_t port) {
-    uint8_t v;
-    __asm__ volatile("inb %1, %0" : "=a"(v) : "Nd"(port));
-    return v;
-}
-static inline void outb(uint16_t port, uint8_t val) {
-    __asm__ volatile("outb %0, %1" : : "a"(val), "Nd"(port));
-}
-
-
-/**
- * Write a 16-bit word to the specified I/O port.
- */
-static inline void outw(uint16_t port, uint16_t val) {
-    __asm__ volatile ("outw %0, %1"
-                      :
-                      : "a"(val), "Nd"(port));
+static inline void outb(uint16_t port, uint8_t val)
+{
+    __asm__ volatile ( "outb %b0, %w1" : : "a"(val), "Nd"(port) : "memory");
+    /* There's an outb %al, $imm8 encoding, for compile-time constant port numbers that fit in 8b. (N constraint).
+     * Wider immediate constants would be truncated at assemble-time (e.g. "i" constraint).
+     * The  outb  %al, %dx  encoding is the only option for all other cases.
+     * %1 expands to %dx because  port  is a uint16_t.  %w1 could be used if we had the port number a wider C type */
 }
 
-/**
- * Read a 16-bit word from the specified I/O port.
- */
-static inline uint16_t inw(uint16_t port) {
-    uint16_t ret;
-    __asm__ volatile ("inw %1, %0"
-                      : "=a"(ret)
-                      : "Nd"(port));
+static inline uint8_t inb(uint16_t port)
+{
+    uint8_t ret;
+    __asm__ volatile ( "inb %w1, %b0"
+                   : "=a"(ret)
+                   : "Nd"(port)
+                   : "memory");
     return ret;
 }
 
-#endif // IO_H
+static inline void io_wait(void)
+{
+    outb(0x80, 0);
+}
