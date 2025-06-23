@@ -3,6 +3,7 @@
 #include <memory/memory.h>
 #include <memory/paging.h>
 #include <interrupts/idt.h>
+#include "shell/shell.c"
 
 void delay(volatile int count) {
     for (volatile int i = 0; i < count; i++);
@@ -28,20 +29,7 @@ void kernel_init() {
 
 
 void kernel_main() {
-    /* kernel_init();
-
-    // Type any key to continue
-    keyboard_init();
-    print_string("Type any key to continue...\n");
-
-    keyboard_get_char();
-    clear_screen();
-    print_string("Hello, World! :)\n"); */
-
-    clear_screen();
-    idt_init();
-
-    int a = 1 /0;
+    shell_init();
 }
     
 
