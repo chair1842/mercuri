@@ -27,6 +27,19 @@ isr_stub_%1:
     iret
 %endmacro
 
+extern irq_handler
+
+%macro irq_stub 1
+global irq_stub_%1
+irq_stub_%1:
+    cli
+    push dword %1        ; IRQ number
+    call irq_handler
+    add  esp, 4          ; clean up
+    sti
+    iretd
+%endmacro
+
 ; ——————————————————————————————————————————————————————————————
 ; Generate all 32 stubs
 isr_no_err_stub 0
@@ -61,6 +74,9 @@ isr_no_err_stub 28
 isr_no_err_stub 29
 isr_err_stub    30
 isr_no_err_stub 31
+; Generate for IRQ0..IRQ1 (add more as needed)
+irq_stub 32   ; IRQ0 → vector 32
+irq_stub 33   ; IRQ1 → vector 33
 
 ; ——————————————————————————————————————————————————————————————
 ; Build the table of stub entry points
@@ -70,5 +86,10 @@ isr_stub_table:
 %assign i 0
 %rep 32
     dd isr_stub_%+i
+%assign i i+1
+%endrep
+%assign i 32
+%rep 2
+    dd irq_stub_%+i
 %assign i i+1
 %endrep

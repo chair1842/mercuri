@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <io.h>
+#include <interrupts/pic.h>
+#include <interrupts/idt.h>
 
 #define DATA_PORT   0x60
 #define STATUS_PORT 0x64
@@ -122,5 +124,9 @@ char keyboard_get_char() {
 }
 
 void keyboard_init() {
-    // not yet implemented
+    pic_clear_mask(1);
+
+    // 2) Install the IRQ1 stub in your IDT (vector 33)
+    extern void irq_stub_33();  // NASM stub: pushes 1 then calls irq_handler
+    idt_set_descriptor(33, irq_stub_33, 0x8E);
 }

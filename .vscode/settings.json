@@ -4,7 +4,9 @@
         "vga.h": "c",
         "stdint.h": "c",
         "paging.h": "c",
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "pic.h": "c"
     },
-    "editor.fontFamily": "monospace"
+    "editor.fontFamily": "monospace",
+    "makefile.configureOnOpen": false
 }
