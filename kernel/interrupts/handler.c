@@ -25,6 +25,7 @@ void irq_handler(uint32_t irq) {
             break;
         case 1:
             print_string("Keyboard IRQ\n");
+            inb(0x60);
             break;
         default:
             print_string("IRQ ");
@@ -33,5 +34,5 @@ void irq_handler(uint32_t irq) {
             break;
     }
 
-    pic_send_eoi(irq);
+    pic_send_eoi(irq + 32);
 }
