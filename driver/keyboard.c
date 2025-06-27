@@ -11,8 +11,6 @@
 #define BUFFER_SIZE 128
 
 static char buffer[BUFFER_SIZE];
-static int buffer_head = 0;
-static int buffer_tail = 0;
 static bool shift_pressed = false;
 static bool ctrl_pressed = false;
 static bool alt_pressed = false;

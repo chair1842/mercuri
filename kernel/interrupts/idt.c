@@ -25,17 +25,13 @@ extern void* isr_stub_table[];
 void idt_init(void);
 void idt_init() {
     idtr.base = (uintptr_t)&idt[0];
-    idtr.limit = (uint16_t)sizeof(idt_entry_t) * IDT_MAX_DESCRIPTORS - 1;
+    idtr.limit = sizeof(idt_entry_t) * IDT_MAX_DESCRIPTORS - 1;
 
-    for (uint8_t vector = 0; vector < 32; vector++) {
+    for (uint8_t vector = 0; vector <= 33; vector++) {
         idt_set_descriptor(vector, isr_stub_table[vector], 0x8E);
         vectors[vector] = true;
     }
 
-    for (uint8_t vector = 0; vector < 34; vector++) {
-        idt_set_descriptor(vector, isr_stub_table[vector - 32], 0x8E);
-        vectors[vector] = true;
-    }
-    __asm__ volatile ("lidt %0" : : "m"(idtr)); // load the new IDT
-    __asm__ volatile ("sti"); // set the interrupt flag
+    __asm__ volatile ("lidt %0" : : "m"(idtr));
+    __asm__ volatile ("sti");
 }

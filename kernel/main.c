@@ -32,15 +32,16 @@ void kernel_init() {
 
 
 void kernel_main() {
-    //kernel_init();
-    //shell_init();
     kernel_init();
+    //shell_init();
 
-    while (1) {
-        char c = keyboard_get_char();
-        delay(1000000); // Simulate some processing delay
-        print_char(c);
-    }
+    //while (1) {
+    //    if (!keyboard_available());
+    //    char c = keyboard_read_char();
+    //    delay(1000000); // Simulate some processing delay
+    //    print_char(c);
+    //}
+    int i = 1/0;
 }
     
 
