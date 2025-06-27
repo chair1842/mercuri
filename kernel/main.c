@@ -32,8 +32,15 @@ void kernel_init() {
 
 
 void kernel_main() {
+    //kernel_init();
+    //shell_init();
     kernel_init();
-    shell_init();
+
+    while (1) {
+        char c = keyboard_get_char();
+        delay(1000000); // Simulate some processing delay
+        print_char(c);
+    }
 }
     
 
