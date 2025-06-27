@@ -24,7 +24,7 @@ void irq_handler(uint32_t irq) {
             print_string("Timer IRQ\n");
             break;
         case 1:
-            keyboard_poll();  // Handle keyboard input
+            print_string("Keyboard IRQ\n");
             break;
         default:
             print_string("IRQ ");
