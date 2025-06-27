@@ -108,10 +108,12 @@ void keyboard_poll() {
 }
 
 bool keyboard_available() {
+    keyboard_poll();
     return !buffer_empty();
 }
 
 char keyboard_read_char() {
+    keyboard_poll();
     return buffer_pop();
 }
 
