@@ -35,5 +35,5 @@ void irq_handler(uint32_t vector) {
             break;
     }
 
-    pic_send_eoi(irq);
+    pic_send_eoi(vector);
 }
