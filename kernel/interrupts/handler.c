@@ -13,15 +13,19 @@ void exception_handler(int vector, int err_code) {
 
     set_color(COLOR_LIGHT_RED, COLOR_BLACK);
     print_string("Exception!\n");
-    print_string("System halted\n");
+    print_string("Vector: ");
+    print_int(vector);
+    print_string("\nError Code: ");
+    print_int(err_code);
+    print_string("\nSystem halted\n");
 
     for (;;) __asm__ volatile("cli; hlt");
 }
 
 void irq_handler(uint32_t vector) {
-    uint8_t irq = vector - 32;  // Convert vector back to IRQ number
+    //uint8_t irq = vector - 32;  // Convert vector back to IRQ number
 
-    switch (irq) {
+    switch (vector) {
         case 0:
             print_string("Timer IRQ\n");
             break;
@@ -30,7 +34,7 @@ void irq_handler(uint32_t vector) {
             break;
         default:
             print_string("IRQ ");
-            print_int(irq);
+            print_int(vector);
             print_string("\n");
             break;
     }
