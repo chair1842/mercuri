@@ -18,9 +18,7 @@ void exception_handler(int vector, int err_code) {
     for (;;) __asm__ volatile("cli; hlt");
 }
 
-void irq_handler(uint32_t vector) {
-    uint8_t irq = vector - 32;  // Convert vector back to IRQ number
-
+void irq_handler(uint32_t irq) {
     switch (irq) {
         case 0:
             print_string("Timer IRQ\n");

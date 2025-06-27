@@ -88,7 +88,7 @@ isr_stub_table:
     dd isr_stub_%+i
 %assign i i+1
 %endrep
-%assign i 32
+%assign i 0
 %rep 2
     dd irq_stub_%+i
 %assign i i+1
