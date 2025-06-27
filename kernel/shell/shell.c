@@ -21,7 +21,6 @@ void shell_welcome() {
     clear_screen();
     set_color(COLOR_LIGHT_RED, COLOR_BLACK);
     print_string("MERCURI V1\nType 'help' for commands\n\n");
-    delay(200000000);
     set_color(COLOR_WHITE, COLOR_BLACK);
 }
 
