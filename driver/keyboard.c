@@ -106,6 +106,7 @@ void keyboard_poll() {
     }
 
     if (c) buffer_push(c);
+    inb(STATUS_PORT); // Acknowledge the scancode
 }
 
 bool keyboard_available() {
