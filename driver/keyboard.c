@@ -109,12 +109,10 @@ void keyboard_poll() {
 }
 
 bool keyboard_available() {
-    keyboard_poll();  // fill buffer if new input
     return !buffer_empty();
 }
 
 char keyboard_read_char() {
-    keyboard_poll();  // non-blocking
     return buffer_pop();
 }
 
