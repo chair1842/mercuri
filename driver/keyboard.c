@@ -124,6 +124,6 @@ void keyboard_init() {
     pic_clear_mask(1);
 
     // 2) Install the IRQ1 stub in your IDT (vector 33)
-    extern void irq_stub_1();  // NASM stub: pushes 1 then calls irq_handler
-    idt_set_descriptor(33, irq_stub_1, 0x8E);
+    extern void irq_stub_33();  // NASM stub: pushes 1 then calls irq_handler
+    idt_set_descriptor(33, irq_stub_33, 0x8E);
 }

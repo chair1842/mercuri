@@ -75,8 +75,8 @@ isr_no_err_stub 29
 isr_err_stub    30
 isr_no_err_stub 31
 ; Generate for IRQ0..IRQ1 (add more as needed)
-irq_stub 0   ; IRQ0 → vector 32
-irq_stub 1   ; IRQ1 → vector 33
+irq_stub 1   ; IRQ0 → vector 32
+irq_stub 2   ; IRQ1 → vector 33
 
 ; ——————————————————————————————————————————————————————————————
 ; Build the table of stub entry points
@@ -88,7 +88,7 @@ isr_stub_table:
     dd isr_stub_%+i
 %assign i i+1
 %endrep
-%assign i 0
+%assign i 32
 %rep 2
     dd irq_stub_%+i
 %assign i i+1
