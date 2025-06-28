@@ -66,7 +66,7 @@ void calc_command(const char* arg) {
 
     // Evaluate with full precedence and parentheses
     int result = parse_expression();
-    print_string("= ");
+    print_string("\n= ");
     print_int(result);
     print_char('\n');
 }
