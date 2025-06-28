@@ -104,7 +104,6 @@ void keyboard_poll() {
     }
 
     if (c) buffer_push(c);
-    inb(DATA_PORT);
 }
 
 bool keyboard_available() {

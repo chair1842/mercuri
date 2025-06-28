@@ -34,7 +34,7 @@ void irq_handler(uint32_t vector) {
             break;
         default:
             print_string("IRQ ");
-            print_int(irq);
+            print_int(vector);
             print_string("\n");
             break;
     }
