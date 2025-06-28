@@ -35,7 +35,6 @@ void kernel_init() {
 void kernel_main() {
     kernel_init();
     shell_init();
-
 }
     
 
