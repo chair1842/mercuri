@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <io.h>
+#include <driver/pit.h>
 
 uint32_t ticks;
 

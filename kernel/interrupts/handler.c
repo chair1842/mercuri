@@ -3,6 +3,7 @@
 #include <interrupts/pic.h>
 #include <io.h>
 #include <driver/keyboard.h>
+#include <driver/pit.h>
 
 __attribute__((noreturn))
 void exception_handler(int vector, int err_code);
@@ -23,14 +24,14 @@ void exception_handler(int vector, int err_code) {
 }
 
 void irq_handler(uint32_t vector) {
-    //uint8_t irq = vector - 32;  // Convert vector back to IRQ number
+    uint8_t irq = vector - 32;  // Convert vector back to IRQ number
 
-    switch (vector) {
+    switch (irq) {
         case 0:
-            print_string("Timer IRQ\n");
+            pit_handler();
             break;
         case 1:
-            keyboard_poll();  // Handle keyboard input
+            keyboard_poll();
             break;
         default:
             print_string("IRQ ");
