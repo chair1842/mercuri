@@ -19,7 +19,7 @@ void delay(volatile int count) {
 void shell_welcome() {
     clear_screen();
     set_color(COLOR_LIGHT_RED, COLOR_BLACK);
-    print_string("MERCURI V1\nType 'help' for commands\n\n");
+    print_string("MERCURI V1.3\nType 'help' for commands\n\n");
     set_color(COLOR_WHITE, COLOR_BLACK);
 }
 
@@ -34,6 +34,7 @@ void input_command(const char* command) {
         print_string("  echo <text>  - Echo the text back\n");
         print_string("  clear        - Clear the screen\n");
         print_string("  calc <expr>  - Calculate an expression (e.g., calc 2+3)\n");
+        print_string("  about        - Show the about message\n");
     }
     else if (strncmp(command, "echo ", 5) == 0) {
         print_string(command + 5);
@@ -43,6 +44,9 @@ void input_command(const char* command) {
     }
     else if (strncmp(command, "calc", 4) == 0) {
         calc_command(command + 4);
+    }
+    else if (strcmp(command, "about")) {
+        print_string("About Mercuri V1.3\nBy Chair1842\nFrom June 2025");
     }
     else {
         print_string("Unknown command: ");
