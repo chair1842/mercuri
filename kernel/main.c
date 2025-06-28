@@ -17,6 +17,7 @@ void kernel_init() {
 
     pic_remap(0x20, 0x28);
     print_string("PIC Remapped\n");
+    delay(100000000);
     idt_init();
     print_string("IDT Initialized\n");
     delay(100000000);
