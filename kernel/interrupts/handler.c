@@ -12,7 +12,7 @@ __attribute__((noreturn))
 void exception_handler(int vector, int err_code) {
     clear_screen();
 
-    set_color(COLOR_LIGHT_RED, COLOR_BLACK);
+    set_color(COLOR_RED, COLOR_BLACK);
     print_string("Exception!\n");
     print_string("Vector: ");
     print_int(vector);
@@ -22,6 +22,8 @@ void exception_handler(int vector, int err_code) {
 
     for (;;) __asm__ volatile("cli; hlt");
 }
+
+void irq_handler(uint32_t vector);
 
 void irq_handler(uint32_t vector) {
     uint8_t irq = vector - 32;  // Convert vector back to IRQ number

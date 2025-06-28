@@ -10,7 +10,6 @@ isr_stub_%1:
     push dword %1         ; <-- Push the vector number
     call exception_handler
     add esp, 4            ; Clean up the pushed number
-    sti
     iretd
 %endmacro
 
