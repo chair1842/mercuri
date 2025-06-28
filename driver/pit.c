@@ -2,8 +2,6 @@
 #include <io.h>
 #include <driver/pit.h>
 
-uint32_t ticks;
-
 void pit_handler() {
     ticks++;
     // Acknowledge the PIT by reading the status register

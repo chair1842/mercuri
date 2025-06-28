@@ -4,7 +4,7 @@ TARGET = kernel
 KERNEL_DIR = kernel
 DRIVER_DIR = driver
 BOOTLOADER_DIR = bootloader
-INCLUDE_DIR = include
+INCLUDE_DIR = kinclude
 
 # Source files
 KERNEL_SRCS    = $(wildcard $(KERNEL_DIR)/*.c) $(wildcard $(KERNEL_DIR)/memory/*.c) $(wildcard $(KERNEL_DIR)/interrupts/*.c)
