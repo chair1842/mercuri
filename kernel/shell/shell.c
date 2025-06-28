@@ -8,7 +8,6 @@
 // Function declarations
 void delay(volatile int count);
 void shell_welcome();
-void echo(const char* str);
 void input_command(const char* command);
 void shell();
 void shell_init();
@@ -24,36 +23,30 @@ void shell_welcome() {
     set_color(COLOR_WHITE, COLOR_BLACK);
 }
 
-void echo(const char* str) {
-    // print a newline, then the string
-    print_char('\n');
-    print_string(str);
-}
-
 // your existing command handler
 void input_command(const char* command) {
     set_color(COLOR_LIGHT_GREY, COLOR_BLACK);
     if (command[0] == '\0') return;
 
     if (strcmp(command, "help") == 0) {
-        echo("Available commands:");
-        echo("  help         - Show this help message");
-        echo("  echo <text>  - Echo the text back");
-        echo("  clear        - Clear the screen");
-        echo("  calc <expr>  - Calculate an expression (e.g., calc 2+3)");
+        print_string("Available commands:\n");
+        print_string("  help         - Show this help message\n");
+        print_string("  echo <text>  - Echo the text back\n");
+        print_string("  clear        - Clear the screen\n");
+        print_string("  calc <expr>  - Calculate an expression (e.g., calc 2+3)\n");
     }
     else if (strncmp(command, "echo ", 5) == 0) {
-        echo(command + 5);
+        print_string(command + 5);
     }
     else if (strcmp(command, "clear") == 0) {
         shell_init();
     }
     else if (strncmp(command, "calc", 4) == 0) {
-    calc_command(command + 4);
+        calc_command(command + 4);
     }
     else {
-        echo("Unknown command: ");
-        echo(command);
+        print_string("Unknown command: ");
+        print_string(command);
     }
 }
 
@@ -96,6 +89,7 @@ void shell() {
         }
 
         // Process the command
+        print_char('\n');
         input_command(buf);
     }
 }

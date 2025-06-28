@@ -41,7 +41,7 @@ void calc_command(const char* arg) {
 
     // If user typed “calc” with no args, or “calc help”:
     if (*arg == '\0' || strcmp(arg, "help") == 0) {
-        print_string("\nUsage: calc <expression>\n");
+        print_string("Usage: calc <expression>\n");
         print_string("Examples:\n  calc 1+2\n  calc (3+4)*5\n");
         if (*arg == '\0') {
             // Interactive prompt
@@ -66,7 +66,7 @@ void calc_command(const char* arg) {
 
     // Evaluate with full precedence and parentheses
     int result = parse_expression();
-    print_string("\n= ");
+    print_string("= ");
     print_int(result);
     print_char('\n');
 }
