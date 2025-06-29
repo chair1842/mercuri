@@ -45,7 +45,7 @@ void input_command(const char* command) {
     else if (strncmp(command, "calc", 4) == 0) {
         calc_command(command + 4);
     }
-    else if (strcmp(command, "about")) {
+    else if (strcmp(command, "about") == 0) {
         print_string("About Mercuri V1.3\nBy Chair1842\nFrom June 2025");
     }
     else {
