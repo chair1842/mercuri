@@ -1,3 +1,8 @@
+# Toolchain
+CC = i686-elf-gcc
+AS = i686-elf-as
+LD = i686-elf-ld
+
 TARGET = kernel
 
 # Source directories
@@ -17,13 +22,10 @@ KERNEL_OBJS     = $(KERNEL_SRCS:.c=.o)
 DRIVER_OBJS     = $(DRIVER_SRCS:.c=.o)
 BOOTLOADER_OBJS = $(BOOTLOADER_SRCS:.s=.o)
 ASM_OBJS        = $(ASM_SRCS:.asm=.o)
+CRTBEGIN_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
+CRTEND_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
 
-OBJS = $(ASM_OBJS) $(DRIVER_OBJS) $(KERNEL_OBJS) $(BOOTLOADER_OBJS)
-
-# Toolchain
-CC = i686-elf-gcc
-AS = i686-elf-as
-LD = i686-elf-ld
+OBJS = $(CRTBEGIN_OBJ) $(ASM_OBJS) $(DRIVER_OBJS) $(KERNEL_OBJS) $(BOOTLOADER_OBJS) $(CRTEND_OBJ)
 
 CFLAGS = -std=gnu99 -ffreestanding -O2 -Wall -Wextra -I$(INCLUDE_DIR)
 LDFLAGS = -T linker.ld -nostdlib
@@ -52,5 +54,5 @@ clean:
 auto: clean all run
 
 debug:
-	echo $(ASM_OBJS)
-	echo $(ASM_)
+	$(CC) $(CFLAGS) -print-file-name=crtbegin.o
+	$(CC) $(CFLAGS) -print-file-name=crtend.o
