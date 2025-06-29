@@ -16,8 +16,8 @@ void pit_handler(void) {
 // Install the PIT handler and program the timer
 void pit_init(uint32_t frequency_hz) {
     // 1) Hook the ISR stub in the IDT at vector 32
-    extern void irq_stub_0();  // from your NASM: irq_stub 0
-    idt_set_descriptor(32, irq_stub_0, 0x8E);
+    extern void irq_stub_32();  // from your NASM: irq_stub 32
+    idt_set_descriptor(32, irq_stub_32, 0x8E);
 
     // 2) Unmask IRQ0 in the PIC
     pic_clear_mask(0);
