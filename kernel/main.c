@@ -5,6 +5,7 @@
 #include <interrupts/idt.h>
 #include <interrupts/pic.h>
 #include "shell/shell.c"
+#include <driver/pit.h>
 
 void kernel_init() {
     clear_screen();
@@ -24,6 +25,10 @@ void kernel_init() {
 
     keyboard_init();
     print_string("Keyboard Initialized\n");
+    delay(10000000);
+    
+    pit_init(100);
+    print_string("PIT Initialized\n");
     delay(10000000);
 
     print_string("Kernel Initialized\n");
