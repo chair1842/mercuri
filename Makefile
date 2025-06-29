@@ -25,7 +25,7 @@ ASM_OBJS        = $(ASM_SRCS:.asm=.o)
 CRTBEGIN_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
 
-OBJS = $(CRTBEGIN_OBJ) $(ASM_OBJS) $(DRIVER_OBJS) $(KERNEL_OBJS) $(BOOTLOADER_OBJS) $(CRTEND_OBJ)
+OBJS = $(ASM_OBJS) $(DRIVER_OBJS) $(KERNEL_OBJS) $(BOOTLOADER_OBJS)
 
 CFLAGS = -std=gnu99 -ffreestanding -O2 -Wall -Wextra -I$(INCLUDE_DIR)
 LDFLAGS = -T linker.ld -nostdlib
