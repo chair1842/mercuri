@@ -114,7 +114,6 @@ bool keyboard_available() {
 }
 
 char keyboard_read_char() {
-    keyboard_poll();  // non-blocking
     return buffer_pop();
 }
 
