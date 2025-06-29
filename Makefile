@@ -3,7 +3,7 @@ CC = i686-elf-gcc
 AS = i686-elf-as
 LD = i686-elf-ld
 
-TARGET = kernel
+TARGET = mercuri
 
 # Source directories
 KERNEL_DIR = kernel
@@ -27,7 +27,7 @@ CRTEND_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
 
 OBJS = $(ASM_OBJS) $(DRIVER_OBJS) $(KERNEL_OBJS) $(BOOTLOADER_OBJS)
 
-CFLAGS = -std=gnu99 -ffreestanding -O2 -Wall -Wextra -I$(INCLUDE_DIR)
+CFLAGS = -std=gnu99 -ffreestanding -O2 -Wall -Wextra -I$(INCLUDE_DIR) -lgcc
 LDFLAGS = -T linker.ld -nostdlib
 
 # Targets
