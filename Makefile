@@ -22,6 +22,7 @@ KERNEL_OBJS     = $(KERNEL_SRCS:.c=.o)
 DRIVER_OBJS     = $(DRIVER_SRCS:.c=.o)
 BOOTLOADER_OBJS = $(BOOTLOADER_SRCS:.s=.o)
 ASM_OBJS        = $(ASM_SRCS:.asm=.o)
+ASM_OBJS        := $(ASM_OBJS:.s=.o)
 CRTBEGIN_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
 
