@@ -4,19 +4,22 @@
 #include <driver/pit.h>
 #include <interrupts/pic.h>
 #include <interrupts/idt.h>
+#include <vga.h>
 
 static volatile uint32_t ticks = 0;
 
+uint32_t pit_get_ticks();
+
 // This is called by your central IRQ dispatcher via IRQ stub 0 (vector 32)
 void pit_handler(void) {
-    ticks++;
+    print_int(pit_get_ticks);
 }
 
 // Install the PIT handler and program the timer
 void pit_init(uint32_t frequency_hz) {
     // 2) Unmask IRQ0 in the PIC
     pic_clear_mask(0);
-    
+
     // 1) Hook the ISR stub in the IDT at vector 32
     extern void irq_stub_32();  // from your NASM: irq_stub 32
     idt_set_descriptor(32, irq_stub_32, 0x8E);
