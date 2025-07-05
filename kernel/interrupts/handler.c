@@ -30,6 +30,7 @@ void irq_handler(uint32_t vector) {
 
     switch (irq) {
         case 0:
+            pit_handler();
             break;
         case 1:
             keyboard_poll();

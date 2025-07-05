@@ -27,7 +27,7 @@ void kernel_init() {
     print_string("Keyboard Initialized\n");
     delay(10000000);
     
-    pit_init(100);
+    pit_init(1000000);
     print_string("PIT Initialized\n");
     delay(10000000);
 
@@ -39,11 +39,7 @@ void kernel_init() {
 
 void kernel_main() {
     kernel_init();
-    while (1) {
-        print_char('0');
-        print_char('\n');
-        delay(10000000);
-    }
+    shell_init();
 }
     
 

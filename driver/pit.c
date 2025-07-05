@@ -8,13 +8,6 @@
 
 static volatile uint32_t ticks = 0;
 
-uint32_t pit_get_ticks();
-
-// This is called by your central IRQ dispatcher via IRQ stub 0 (vector 32)
-void pit_handler(void) {
-    print_int(pit_get_ticks);
-}
-
 // Install the PIT handler and program the timer
 void pit_init(uint32_t frequency_hz) {
     // 2) Unmask IRQ0 in the PIC
@@ -31,10 +24,15 @@ void pit_init(uint32_t frequency_hz) {
     io_wait();
     outb(0x40, divisor & 0xFF); // Divisor low byte
     io_wait();
-    outb(0x40, (divisor >> 8) & 0xFF); // Divisor high byte */
+    outb(0x40, (divisor >> 8) & 0xFF); */ // Divisor high byte
 }
 
 // Read the tick count
 uint32_t pit_get_ticks(void) {
     return ticks;
+}
+
+// This is called by your central IRQ dispatcher via IRQ stub 0 (vector 32)
+void pit_handler(void) {
+    ticks++;
 }

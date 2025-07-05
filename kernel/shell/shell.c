@@ -20,7 +20,7 @@ void delay(volatile int count) {
 void shell_welcome() {
     clear_screen();
     set_color(COLOR_LIGHT_RED, COLOR_BLACK);
-    print_string("MERCURI V1.3\nType 'help' for commands\n\n");
+    print_string("MERCURI V1.4\nType 'help' for commands\n\n");
     set_color(COLOR_WHITE, COLOR_BLACK);
 }
 
@@ -36,6 +36,9 @@ void input_command(const char* command) {
         print_string("  clear        - Clear the screen\n");
         print_string("  calc <expr>  - Calculate an expression (e.g., calc 2+3)\n");
         print_string("  about        - Show the about message\n");
+        print_string("  secfm        - Show how many seconds have passed since boot\n");
+        print_string("  minfm        - Show how many minutes have passed since boot\n");
+        print_string("  hrfm         - Show how many hours have passed since boot\n");
     }
     else if (strncmp(command, "echo ", 5) == 0) {
         print_string(command + 5);
@@ -47,8 +50,17 @@ void input_command(const char* command) {
         calc_command(command + 4);
     }
     else if (strcmp(command, "about") == 0) {
-        print_string("About Mercuri V1.3\nBy Chair1842\nFrom June 2025");
+        print_string("About Mercuri V1.4\nBy Chair1842\nFrom July 2025");
     }
+    else if (strcmp(command, "secfm") == 0) {
+        print_int(pit_get_ticks() / 18);
+    }
+    else if (strcmp(command, "minfm") == 0) {
+        print_int(pit_get_ticks() / 1080);
+    }
+    /*else if (strcmp(command, "hrfm") == 0) {
+        print_int(pit_get_ticks() / 64800);
+    } */
     else {
         print_string("Unknown command: ");
         print_string(command);
