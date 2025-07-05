@@ -38,7 +38,7 @@ void input_command(const char* command) {
         print_string("  about        - Show the about message\n");
         print_string("  secfm        - Show how many seconds have passed since boot\n");
         print_string("  minfm        - Show how many minutes have passed since boot\n");
-        print_string("  hrfm         - Show how many hours have passed since boot\n");
+        //print_string("  hrfm         - Show how many hours have passed since boot\n");
     }
     else if (strncmp(command, "echo ", 5) == 0) {
         print_string(command + 5);
@@ -50,7 +50,7 @@ void input_command(const char* command) {
         calc_command(command + 4);
     }
     else if (strcmp(command, "about") == 0) {
-        print_string("About Mercuri V1.4\nBy Chair1842\nFrom July 2025");
+        print_string("About Mercuri V1.4.1\nBy Chair1842\nFrom July 2025\nNew in 1.4.1: MA9Y command that will corrupt the os, tested in QEMU");
     }
     else if (strcmp(command, "secfm") == 0) {
         print_int(pit_get_ticks() / 18);
@@ -61,6 +61,11 @@ void input_command(const char* command) {
     /*else if (strcmp(command, "hrfm") == 0) {
         print_int(pit_get_ticks() / 64800);
     } */
+   else if (strcmp(command, "MA9Y") == 0) {
+        while (1) {
+            print_string("CORRUPT");
+        }
+   }
     else {
         print_string("Unknown command: ");
         print_string(command);
