@@ -2,6 +2,7 @@
 #include <driver/keyboard.h>
 #include <string.h>
 #include "mprog/calculator.c"
+#include <driver/pit.h>
 
 #define CMD_BUF_SIZE 128
 

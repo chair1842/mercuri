@@ -39,7 +39,11 @@ void kernel_init() {
 
 void kernel_main() {
     kernel_init();
-    shell_init();
+    while (1) {
+        print_char('0');
+        print_char('\n');
+        delay(10000000);
+    }
 }
     
 
