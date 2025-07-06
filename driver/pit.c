@@ -5,6 +5,7 @@
 #include <interrupts/pic.h>
 #include <interrupts/idt.h>
 #include <vgatxm.h>
+#include <threading/thread.h>
 
 static volatile uint32_t ticks = 0;
 
@@ -19,12 +20,12 @@ void pit_init(uint32_t frequency_hz) {
 
     // 3) Program PIT channel 0 for square wave: 
     //    Mode 3, LSB/MSB, channel 0 (port 0x43), divisor = base_freq / freq.
-    /* uint32_t divisor = 1193182 / frequency_hz;
+    uint32_t divisor = 1193182 / frequency_hz;
     outb(0x43, 0x36);           // Command port: channel 0, LSB/MSB, Mode 3
     io_wait();
     outb(0x40, divisor & 0xFF); // Divisor low byte
     io_wait();
-    outb(0x40, (divisor >> 8) & 0xFF); */ // Divisor high byte
+    outb(0x40, (divisor >> 8) & 0xFF); // Divisor high byte
 }
 
 // Read the tick count

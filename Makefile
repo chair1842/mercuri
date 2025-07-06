@@ -15,7 +15,7 @@ INCLUDE_DIR = kinclude
 KERNEL_SRCS    = $(wildcard $(KERNEL_DIR)/*.c) $(wildcard $(KERNEL_DIR)/memory/*.c) $(wildcard $(KERNEL_DIR)/interrupts/*.c)
 DRIVER_SRCS    = $(wildcard $(DRIVER_DIR)/*.c)
 BOOTLOADER_SRCS = $(wildcard $(BOOTLOADER_DIR)/*.s)
-ASM_SRCS       = $(wildcard $(KERNEL_DIR)/*.S) $(wildcard $(KERNEL_DIR)/interrupts/*.asm)
+ASM_SRCS       = $(wildcard $(KERNEL_DIR)/threading/*.s) $(wildcard $(KERNEL_DIR)/interrupts/*.asm)
 
 # Object files
 KERNEL_OBJS     = $(KERNEL_SRCS:.c=.o)

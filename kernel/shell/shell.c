@@ -53,10 +53,10 @@ void input_command(const char* command) {
         print_string("About Mercuri V1.4.1\nBy Chair1842\nFrom July 2025\nNew in 1.4.1: MA9Y command that will corrupt the os, tested in QEMU");
     }
     else if (strcmp(command, "secfm") == 0) {
-        print_int(pit_get_ticks() / 18);
+        print_int(pit_get_ticks() / 100);
     }
     else if (strcmp(command, "minfm") == 0) {
-        print_int(pit_get_ticks() / 1080);
+        print_int(pit_get_ticks() / 6000);
     }
     /*else if (strcmp(command, "hrfm") == 0) {
         print_int(pit_get_ticks() / 64800);
