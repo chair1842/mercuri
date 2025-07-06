@@ -1,5 +1,5 @@
 #include <driver/keyboard.h>
-#include <vga.h>
+#include <vgatxm.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <io.h>

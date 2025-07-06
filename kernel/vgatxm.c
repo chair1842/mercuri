@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include <vga.h>
+#include <vgatxm.h>
 #include <io.h>
 
 static uint8_t current_color = 0x07;

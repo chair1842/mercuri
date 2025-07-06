@@ -1,4 +1,4 @@
-#include <vga.h>
+#include <vgatxm.h>
 #include <stdint.h>
 #include <interrupts/pic.h>
 #include <io.h>

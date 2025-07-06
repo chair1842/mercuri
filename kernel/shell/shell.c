@@ -1,4 +1,4 @@
-#include <vga.h>
+#include <vgatxm.h>
 #include <driver/keyboard.h>
 #include <string.h>
 #include "mprog/calculator.c"

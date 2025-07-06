@@ -1,4 +1,4 @@
-#include <vga.h>
+#include <vgatxm.h>
 #include <driver/keyboard.h>
 #include <memory/memory.h>
 #include <memory/paging.h>

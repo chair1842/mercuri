@@ -4,7 +4,7 @@
 #include <driver/pit.h>
 #include <interrupts/pic.h>
 #include <interrupts/idt.h>
-#include <vga.h>
+#include <vgatxm.h>
 
 static volatile uint32_t ticks = 0;
 

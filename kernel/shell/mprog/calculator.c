@@ -1,6 +1,6 @@
 #include <stdbool.h>
 #include <string.h>
-#include <vga.h>
+#include <vgatxm.h>
 #include <driver/keyboard.h>
 
 static const char* input;
