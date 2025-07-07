@@ -14,10 +14,6 @@ void pit_init(uint32_t frequency_hz) {
     // 2) Unmask IRQ0 in the PIC
     pic_clear_mask(0);
 
-    // 1) Hook the ISR stub in the IDT at vector 32
-    extern void irq_stub_32();  // from your NASM: irq_stub 32
-    idt_set_descriptor(32, irq_stub_32, 0x8E);
-
     // 3) Program PIT channel 0 for square wave: 
     //    Mode 3, LSB/MSB, channel 0 (port 0x43), divisor = base_freq / freq.
     uint32_t divisor = 1193182 / frequency_hz;

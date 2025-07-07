@@ -7,6 +7,7 @@ extern exception_handler
 global isr_stub_%1
 isr_stub_%1:
     cli
+    push dword 0         ; <-- Push a dummy error code
     push dword %1         ; <-- Push the vector number
     call exception_handler
     add esp, 4            ; Clean up the pushed number

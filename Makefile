@@ -12,10 +12,10 @@ BOOTLOADER_DIR = bootloader
 INCLUDE_DIR = kinclude
 
 # Source files
-KERNEL_SRCS    = $(wildcard $(KERNEL_DIR)/*.c) $(wildcard $(KERNEL_DIR)/memory/*.c) $(wildcard $(KERNEL_DIR)/interrupts/*.c)
+KERNEL_SRCS    = $(wildcard $(KERNEL_DIR)/*.c) $(wildcard $(KERNEL_DIR)/memory/*.c) $(wildcard $(KERNEL_DIR)/interrupts/*.c) $(wildcard $(KERNEL_DIR)/threading/*.c)
 DRIVER_SRCS    = $(wildcard $(DRIVER_DIR)/*.c)
 BOOTLOADER_SRCS = $(wildcard $(BOOTLOADER_DIR)/*.s)
-ASM_SRCS       = $(wildcard $(KERNEL_DIR)/threading/*.s) $(wildcard $(KERNEL_DIR)/interrupts/*.asm)
+ASM_SRCS       = $(wildcard $(KERNEL_DIR)/threading/*.S) $(wildcard $(KERNEL_DIR)/interrupts/*.asm)
 
 # Object files
 KERNEL_OBJS     = $(KERNEL_SRCS:.c=.o)
@@ -23,6 +23,7 @@ DRIVER_OBJS     = $(DRIVER_SRCS:.c=.o)
 BOOTLOADER_OBJS = $(BOOTLOADER_SRCS:.s=.o)
 ASM_OBJS        = $(ASM_SRCS:.asm=.o)
 ASM_OBJS        := $(ASM_OBJS:.s=.o)
+ASM_OBJS        := $(ASM_OBJS:.S=.o)
 CRTBEGIN_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
 
@@ -43,6 +44,9 @@ kernel/interrupts/isr_stubs.o: kernel/interrupts/isr_stubs.asm
 %.o: %.s
 	$(AS) $< -o $@
 
+kernel/threading/switch.o: kernel/threading/switch.S
+	$(AS) $< -o $@
+
 $(TARGET).bin: $(OBJS)
 	echo "Linking $^" 
 	$(LD) $(LDFLAGS) -o $@ $^
@@ -55,5 +59,4 @@ clean:
 auto: clean all run
 
 debug:
-	$(CC) $(CFLAGS) -print-file-name=crtbegin.o
-	$(CC) $(CFLAGS) -print-file-name=crtend.o
+	$(ASM_SRCS)

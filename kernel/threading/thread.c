@@ -1,6 +1,7 @@
 // thread.c
 #include <threading/thread.h>
 #include <memory/memory.h>   // for kmalloc()
+#include <vgatxm.h>
 
 thread_t* current_thread = 0;
 static thread_t* last_thread = 0;
