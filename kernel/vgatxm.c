@@ -46,6 +46,7 @@ void clear_screen() {
 }
 
 void print_char(char c) {
+    for (volatile int i = 0; i < 2; i++);
     volatile char* video_memory = VIDEO_MEMORY;
 
     if (c == '\n') {
@@ -84,6 +85,7 @@ void print_char(char c) {
     }
 
     vga_set_cursor(cursor_row, cursor_col);
+    for (volatile int i = 0; i < 2; i++);
 }
 
 void print_string(const char* str) {
