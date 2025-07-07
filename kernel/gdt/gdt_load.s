@@ -1,5 +1,6 @@
 .global gdt_load
 .type gdt_load, @function
+.extern gdt_descriptor 
 gdt_load:
     lgdt gdt_descriptor         # Load GDT
 

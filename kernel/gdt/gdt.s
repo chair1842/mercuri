@@ -1,5 +1,6 @@
 .section .data
 .align 8
+.global gdt_descriptor
 
 gdt:
     .quad 0x0000000000000000    # Null descriptor
@@ -20,7 +21,6 @@ gdt:
     .byte 0xCF
     .byte 0x00
 
-.global gdt_descriptor
 gdt_descriptor:
     .word gdt_end - gdt - 1     # Limit
     .long gdt                   # Base address
