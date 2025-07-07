@@ -5,7 +5,7 @@
 #include <interrupts/pic.h>
 #include <interrupts/idt.h>
 #include <vgatxm.h>
-#include <threading/thread.h>
+
 
 static volatile uint32_t ticks = 0;
 

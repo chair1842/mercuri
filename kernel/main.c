@@ -6,7 +6,7 @@
 #include <interrupts/pic.h>
 #include "shell/shell.c"
 #include <driver/pit.h>
-#include <threading/thread.h>
+
 
 void kernel_init() {
     clear_screen();
