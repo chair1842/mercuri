@@ -37,35 +37,9 @@ void kernel_init() {
     clear_screen();
 }
 
-thread_t t1, t2;
-
-void task1(void) {
-    while (1) {
-        print_string("A");
-        for (volatile int i = 0; i < 100000000; i++);
-    }
-}
-
-void task2(void) {
-    while (1) {
-        print_string("B");
-        for (volatile int i = 0; i < 100000000; i++);
-        thread_yield();
-    }
-}
-
 void kernel_main() {
-    clear_screen();
-    pic_remap(0x20, 0x28);
-    idt_init();
-
-    scheduler_init();
-    thread_create(&t1, task1);
-    thread_create(&t2, task2);
-    thread_yield();
-    pit_init(20);
-
-    for (;;) { __asm__ volatile("hlt"); }
+    kernel_init();
+    shell_init();
 }
     
 
