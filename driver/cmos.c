@@ -12,6 +12,7 @@
 #include <io.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <driver/cmos.h>
 
 uint8_t cmos_read(uint8_t reg) {
     outb(CMOS_ADDRESS, reg);

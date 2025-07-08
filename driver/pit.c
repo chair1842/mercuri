@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <io.h>           // inb/outb/io_wait
 #include <driver/pit.h>
+#include <driver/cmos.h>
 #include <interrupts/pic.h>
 #include <interrupts/idt.h>
 #include <vgatxm.h>
@@ -32,4 +33,6 @@ uint32_t pit_get_ticks(void) {
 // This is called by your central IRQ dispatcher via IRQ stub 0 (vector 32)
 void pit_handler(void) {
     ticks++;
+    cmos_time_t time;
+    cmos_get_time(&time);
 }
