@@ -4,6 +4,7 @@
 #include <memory/paging.h>
 #include <interrupts/idt.h>
 #include <interrupts/pic.h>
+#include <driver/cmos.h>
 #include "shell/shell.c"
 #include <driver/pit.h>
 
@@ -28,7 +29,7 @@ void kernel_init() {
     print_string("Keyboard Initialized\n");
     delay(10000000);
     
-    pit_init(100);
+    pit_init(20);
     print_string("PIT Initialized\n");
     delay(10000000);
 
@@ -38,8 +39,8 @@ void kernel_init() {
 }
 
 void kernel_main() {
-    kernel_init();
-    shell_init();
+    clear_screen();
+    print_string("Hello, world!\n");
 }
     
 
